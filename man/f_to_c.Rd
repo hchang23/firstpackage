@@ -13,7 +13,7 @@ f_to_c(temp_F)
 Numeric indicating temperature \code{temp_F} converted to Celsius.
 }
 \description{
-This function converts temperature from Fehrenheit to Celsius.
+This function converts temperature from Fahrenheit to Celsius.
 }
 \examples{
 f_to_c(32)

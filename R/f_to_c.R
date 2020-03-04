@@ -1,6 +1,6 @@
 #' Fahrenheit converter
 #'
-#' This function converts temperature from Fehrenheit to Celsius.
+#' This function converts temperature from Fahrenheit to Celsius.
 #'
 #' @param temp_F Numeric input indicating temperature in Fahrenheit
 #' @keywords temperature
