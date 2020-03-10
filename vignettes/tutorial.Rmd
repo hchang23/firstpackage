@@ -15,6 +15,32 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+# Introduction
+
+This package includes the functions `my_t_test`, `my_lm`, `my_knn_cv`, and `my_rf_cv`.
+To install and load this package:
+
+```{r, eval=FALSE}
+# install firstpackage
+devtools::install_github("hchang23/firstpackage")
+
+# load firstpackage
 library(firstpackage)
 ```
+
+# Tutorial: my_t_test
+
+
+
+# Tutorial: my_lm
+
+
+
+# Tutorial: my_knn_cv
+
+
+
+# Tutorial: my_rf_cv
+
+
+
