@@ -1,7 +1,7 @@
 #' Edgar Anderson's Iris Data
 #'
 #' The famous \code{\link[datasets]{iris}} dataset taken from the
-#' \code{datasets} packageto practice adding datasets to our R package.
+#' \code{datasets} package to practice adding datasets to our R package.
 #'
 #' @format a data framewith 150 observations and 5 variables:
 #' \describe{
