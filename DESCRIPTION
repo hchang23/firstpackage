@@ -5,7 +5,8 @@ Authors@R:
     person(given = "Hannah",
            family = "Chang",
            role = c("aut", "cre"),
-           email = "hchang23@uw.edu"
+           email = "hchang23@uw.edu",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Building a package the includes functions written throughout STAT302.
 Depends: R (>= 2.10)
 Imports: 
