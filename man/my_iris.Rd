@@ -24,6 +24,6 @@ my_iris
 }
 \description{
 The famous \code{\link[datasets]{iris}} dataset taken from the
-\code{datasets} packageto practice adding datasets to our R package.
+\code{datasets} package to practice adding datasets to our R package.
 }
 \keyword{datasets}
