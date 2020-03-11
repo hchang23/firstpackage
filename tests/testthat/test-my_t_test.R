@@ -15,9 +15,11 @@ test_that("my_t_test outputs a list", {
   expect_is(my_t_test(1:10, "less", 0), "list")
 })
 
+test <- my_t_test(1:10, "less", 0)
+
 test_that("elements of output list have correct class", {
-  expect_is(my_t_test(1:10, "less", 0)$t_stat, "numeric")
-  expect_is(my_t_test(1:10, "less", 0)$df, "numeric")
-  expect_is(my_t_test(1:10, "less", 0)$alternative, "character")
-  expect_is(my_t_test(1:10, "less", 0)$p_val, "numeric")
+  expect_is(test$t_stat, "numeric")
+  expect_is(test$df, "numeric")
+  expect_is(test$alternative, "character")
+  expect_is(test$p_val, "numeric")
 })
