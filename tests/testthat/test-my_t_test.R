@@ -6,12 +6,9 @@ test_that("alternative input that isn't 'two.sided', 'less', or 'greater'
 })
 
 test_that("p-value is calculated correctly", {
-  expect_equal(my_t_test(1:10, "two.sided", 0)$p_val, 3e-04,
-               tolerance = 0.001)
-  expect_equal(my_t_test(1:10, "less", 0)$p_val, 0.9999,
-               tolerance = 0.001)
-  expect_equal(my_t_test(1:10, "greater", 0)$p_val, 1e-04,
-               tolerance = 0.001)
+  expect_equal(my_t_test(1:10, "two.sided", 0)$p_val, 3e-04, tolerance = 0.001)
+  expect_equal(my_t_test(1:10, "less", 0)$p_val, 0.9999, tolerance = 0.001)
+  expect_equal(my_t_test(1:10, "greater", 0)$p_val, 1e-04, tolerance = 0.001)
 })
 
 test_that("my_t_test outputs a list", {
