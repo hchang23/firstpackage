@@ -18,7 +18,7 @@ test_that("my_t_test outputs a list", {
   expect_is(my_t_test(1:10, "less", 0), "list")
 })
 
-test_that("elements of output list are numeric, numeric, character, numeric", {
+test_that("elements of output list have correct class", {
   expect_is(my_t_test(1:10, "less", 0)$t_stat, "numeric")
   expect_is(my_t_test(1:10, "less", 0)$df, "numeric")
   expect_is(my_t_test(1:10, "less", 0)$alternative, "character")
