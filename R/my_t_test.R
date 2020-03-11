@@ -6,6 +6,7 @@
 #' @param alternative Character string of the alternative hypothesis, must be
 #'   either "\code{two.sided}", "\code{less}", or "\code{greater}".
 #' @param mu Numeric of true value of the mean.
+#' @keywords inference
 #'
 #' @return A list containing the following:
 #' @return \code{t_stat}, the value of the test statistic.

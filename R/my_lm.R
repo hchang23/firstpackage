@@ -5,6 +5,7 @@
 #' @param formula A "\code{formula}" class object that describes the model to
 #'   be fitted, typically having the form \code{response ~ terms}.
 #' @param data Data frame containing the variables in the model.
+#' @keywords inference
 #'
 #' @return A table with rows for each coefficient and columns for the following:
 #'   \code{Estimate}, \code{Std. Error}, \code{t value}, and \code{Pr(>|t|)}.

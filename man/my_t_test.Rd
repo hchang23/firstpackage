@@ -33,3 +33,4 @@ my_t_test(1:10, "two.sided", 0)
 my_t_test(rnorm(10), "less", 0)
 
 }
+\keyword{inference}

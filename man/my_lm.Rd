@@ -27,3 +27,4 @@ my_lm(mpg ~ hp, mtcars)
 my_lm(mpg ~ hp + wt, mtcars)
 
 }
+\keyword{inference}
