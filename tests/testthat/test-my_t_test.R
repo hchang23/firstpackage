@@ -5,6 +5,10 @@ test_that("alternative input that isn't 'two.sided', 'less', or 'greater'
   expect_error(my_t_test(1:10, 5, 0))
 })
 
+test_that("non-vector input throws an error", {
+  expect_error(my_t_test("a string"))
+})
+
 test_that("p-value is calculated correctly", {
   expect_equal(my_t_test(1:10, "two.sided", 0)$p_val, 3e-04, tolerance = 0.001)
   expect_equal(my_t_test(1:10, "less", 0)$p_val, 0.9999, tolerance = 0.001)

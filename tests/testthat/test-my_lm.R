@@ -5,6 +5,10 @@ test_that("my_lm outputs a table", {
   expect_is(my_lm(mpg ~ hp + wt, mtcars), "table")
 })
 
+test_that("non-table input throws an error", {
+  expect_error(my_lm("a string"))
+})
+
 test_that("estimate for each coefficient is calculated correctly", {
   expect_equal(test[1, 1], 30.09886, tolerance = 0.0001)
   expect_equal(test[2, 1], -0.06823, tolerance = 0.0001)
