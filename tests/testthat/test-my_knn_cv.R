@@ -1,5 +1,4 @@
 # within test-my_knn_cv.R
-data("iris")
 test <- my_knn_cv(iris[, 1:4], iris$Species, 1, 5)
 
 test_that("my_knn_cv outputs a list", {
