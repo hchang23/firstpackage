@@ -17,11 +17,7 @@
 #'   misclassification error.
 #'
 #' @examples
-#' data(gapminder)
 #' data(iris)
-#'
-#' # 1-nearest neighbor CV with gapminder data
-#' my_knn_cv(gapminder[, c(4, 6)], gapminder$continent, k_nn = 1, k_cv = 5)
 #'
 #' # 5-nearest neighbor CV with iris data
 #' my_knn_cv(iris[, 1:4], iris$Species, k_nn = 5, k_cv = 5)
