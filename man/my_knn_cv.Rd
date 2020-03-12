@@ -38,3 +38,4 @@ my_knn_cv(gapminder[, c(4, 6)], gapminder$continent, k_nn = 1, k_cv = 5)
 my_knn_cv(iris[, 1:4], iris$Species, k_nn = 5, k_cv = 5)
 
 }
+\keyword{prediction}

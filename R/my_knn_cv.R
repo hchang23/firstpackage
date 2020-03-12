@@ -9,6 +9,7 @@
 #' @param cl True class value of the training data.
 #' @param k_nn Integer of the number of neighbors.
 #' @param k_cv Integer of the number of folds.
+#' @keywords prediction
 #'
 #' @return A list containing:
 #' @return \code{class}, a vector of the predicted class.
