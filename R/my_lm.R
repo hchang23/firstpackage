@@ -2,6 +2,8 @@
 #'
 #' This function is used to fit linear models on a data set.
 #'
+#' @import stats
+#'
 #' @param formula A "\code{formula}" class object that describes the model to
 #'   be fitted, typically having the form \code{response ~ terms}.
 #' @param data Data frame containing the variables in the model.

@@ -3,7 +3,7 @@
 #' This function uses the \code{my_gapminder} data to predict \code{lifeExp}
 #' using covariate \code{gdpPercap} using folds.
 #'
-#' @import randomForest magrittr
+#' @import randomForest magrittr stats
 #'
 #' @param k Integer of the number of folds.
 #' @keywords prediction

@@ -2,6 +2,8 @@
 #'
 #' This function performs one-sample t-tests on vectors of data.
 #'
+#' @import stats
+#'
 #' @param x Numeric vector of data values.
 #' @param alternative Character string of the alternative hypothesis, must be
 #'   either "\code{two.sided}", "\code{less}", or "\code{greater}".
