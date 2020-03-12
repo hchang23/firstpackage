@@ -19,6 +19,8 @@ my_rf_cv <- function(k) {
     stop("k must be numeric")
   }
 
+  my_gapminder <- my_gapminder
+
   # sample size
   n <- nrow(my_gapminder)
   # randomly assign observations to variable folds
