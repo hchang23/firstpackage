@@ -13,7 +13,7 @@
 #'
 #' @return A list containing:
 #' @return \code{class}, a vector of the predicted class.
-#' @return \code{cv_error}, a numeric of the average cross-validation
+#' @return \code{CV_error}, a numeric of the average cross-validation
 #'   misclassification error rate.
 #'
 #' @examples

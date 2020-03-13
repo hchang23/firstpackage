@@ -20,8 +20,8 @@ A list containing:
 
 \code{class}, a vector of the predicted class.
 
-\code{cv_error}, a numeric with the cross-validation
-  misclassification error.
+\code{CV_error}, a numeric of the average cross-validation
+  misclassification error rate.
 }
 \description{
 This function randomly splits data into k "folds" and predicts class using
