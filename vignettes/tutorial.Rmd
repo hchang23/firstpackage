@@ -42,9 +42,9 @@ data("my_gapminder")
 
 ## Test 1: alternative is "two.sided"
 
-$H_0:\mu=60$
+$H_0: \mu = 60$
 
-$H_A:\mu\neq60$
+$H_A: \mu \neq 60$
 
 ```{r}
 my_t_test(my_gapminder$lifeExp, "two.sided", 60)
@@ -56,9 +56,9 @@ that the mean life expectancy is not 60 years.
 
 ## Test 2: alternative is "less"
 
-$H_0:\mu=60$
+$H_0: \mu = 60$
 
-$H_A:\mu < 60$
+$H_A: \mu < 60$
 
 ```{r}
 my_t_test(my_gapminder$lifeExp, "less", 60)
@@ -70,9 +70,9 @@ the mean life expectancy is less than 60 years.
 
 ## Test 3: alternative is "greater"
 
-$H_0:\mu=60$
+$H_0: \mu = 60$
 
-$H_A:\mu > 60$
+$H_A: \mu > 60$
 
 ```{r}
 my_t_test(my_gapminder$lifeExp, "greater", 60)
@@ -84,7 +84,43 @@ that the mean life expectancy is greater than 60 years.
 
 # Tutorial: my_lm
 
+The regression model below will be using `lifeExp` as the response variable and
+`gdpPercap` and `continent` as the explanatory variables. The hypothesis test 
+associated with the coefficient `gdpPercap`, which is the GDP per capita in USD,
+is:
 
+$H_0: \beta = 0$
+
+$H_A: \beta \neq 0$
+
+```{r}
+test <- my_lm(lifeExp ~ gdpPercap + continent, my_gapminder)
+```
+
+From the results, the p-value for `gdpPercap` coefficient is 8.55e-73, which is 
+less than $\alpha = 0.05$, so I reject the null hypothesis. There is strong
+evidence that there is a relationship between `lifeExp` and `gdpPercap`. 
+
+```{r}
+# make data frame of fitted and actual values
+my_coeff <- test[, 1]
+my_matrix <- model.matrix(lifeExp ~ gdpPercap + continent, data = my_gapminder)
+y_hat <- my_matrix %*% as.matrix(my_coeff)
+my_df <- data.frame("Fitted" = y_hat, 
+                    "Actual" = my_gapminder$lifeExp,
+                    "Continent" = my_gapminder$continent)
+
+# load ggplot2 to plot the fitted vs actual values
+library(ggplot2)
+ggplot(my_df, aes(x = Actual, y = Fitted, color = Continent)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0) +
+  theme_light()
+```
+
+From the plot, the line is the model fit and the data points are the actual 
+values. The line appears to fit the data points from Europe and Oceania fairly
+well, but doesn't predict as well for the other continents. 
 
 # Tutorial: my_knn_cv
 
