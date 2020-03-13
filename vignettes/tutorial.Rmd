@@ -17,7 +17,9 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-This package includes the functions `my_t_test`, `my_lm`, `my_knn_cv`, and `my_rf_cv`.
+This package is written for statistical inference and prediction, and includes 
+the functions `my_t_test`, `my_lm`, `my_knn_cv`, and `my_rf_cv`.
+
 To install and load this package:
 
 ```{r, eval=FALSE}
@@ -30,7 +32,55 @@ library(firstpackage)
 
 # Tutorial: my_t_test
 
+The t-tests below will be using the `lifeExp` variable from `my_gapminder` and
+interpreting the results with $\alpha = 0.05$.
 
+```{r}
+# load my_gapminder data
+data("my_gapminder")
+```
+
+## Test 1: alternative is "two.sided"
+
+$H_0:\mu=60$
+
+$H_A:\mu\neq60$
+
+```{r}
+my_t_test(my_gapminder$lifeExp, "two.sided", 60)
+```
+
+The `p_val` from the results is 0.093, which is greater than $\alpha = 0.05$,
+so I fail to reject the null hypothesis. There is not enough evidence to suggest
+that the mean life expectancy is not 60 years. 
+
+## Test 2: alternative is "less"
+
+$H_0:\mu=60$
+
+$H_A:\mu < 60$
+
+```{r}
+my_t_test(my_gapminder$lifeExp, "less", 60)
+```
+
+The `p_val` from the results is 0.0466, which is less than $\alpha = 0.05$,
+so I reject the null hypothesis. There is sufficient evidence to suggest that
+the mean life expectancy is less than 60 years. 
+
+## Test 3: alternative is "greater"
+
+$H_0:\mu=60$
+
+$H_A:\mu > 60$
+
+```{r}
+my_t_test(my_gapminder$lifeExp, "greater", 60)
+```
+
+The `p_val` from the results is 0.95, which is greater than $\alpha = 0.05$,
+so I fail to reject the null hypothesis. There is not enough evidence to suggest
+that the mean life expectancy is greater than 60 years. 
 
 # Tutorial: my_lm
 
