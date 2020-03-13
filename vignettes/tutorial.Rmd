@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Introduction
+## Introduction
 
 This package is written for statistical inference and prediction, and includes 
 the functions `my_t_test`, `my_lm`, `my_knn_cv`, and `my_rf_cv`.
@@ -25,22 +25,24 @@ To install and load this package:
 ```{r, eval=FALSE}
 # install firstpackage
 devtools::install_github("hchang23/firstpackage")
-
+```
+```{r}
 # load firstpackage
 library(firstpackage)
 ```
 
-# Tutorial: my_t_test
+
+## Tutorial: my_t_test
 
 The t-tests below will be using the `lifeExp` variable from `my_gapminder` and
-interpreting the results with $\alpha = 0.05$.
+interpreting the results with $\alpha$ = 0.05.
 
 ```{r}
 # load my_gapminder data
 data("my_gapminder")
 ```
 
-## Test 1: alternative is "two.sided"
+### Test 1: alternative is "two.sided"
 
 $H_0: \mu = 60$
 
@@ -50,11 +52,11 @@ $H_A: \mu \neq 60$
 my_t_test(my_gapminder$lifeExp, "two.sided", 60)
 ```
 
-The `p_val` from the results is 0.093, which is greater than $\alpha = 0.05$,
+The `p_val` from the results is 0.093, which is greater than $\alpha$ = 0.05,
 so I fail to reject the null hypothesis. There is not enough evidence to suggest
 that the mean life expectancy is not 60 years. 
 
-## Test 2: alternative is "less"
+### Test 2: alternative is "less"
 
 $H_0: \mu = 60$
 
@@ -64,11 +66,11 @@ $H_A: \mu < 60$
 my_t_test(my_gapminder$lifeExp, "less", 60)
 ```
 
-The `p_val` from the results is 0.0466, which is less than $\alpha = 0.05$,
+The `p_val` from the results is 0.0466, which is less than $\alpha$ = 0.05,
 so I reject the null hypothesis. There is sufficient evidence to suggest that
 the mean life expectancy is less than 60 years. 
 
-## Test 3: alternative is "greater"
+### Test 3: alternative is "greater"
 
 $H_0: \mu = 60$
 
@@ -78,16 +80,16 @@ $H_A: \mu > 60$
 my_t_test(my_gapminder$lifeExp, "greater", 60)
 ```
 
-The `p_val` from the results is 0.95, which is greater than $\alpha = 0.05$,
+The `p_val` from the results is 0.95, which is greater than $\alpha$ = 0.05,
 so I fail to reject the null hypothesis. There is not enough evidence to suggest
 that the mean life expectancy is greater than 60 years. 
 
-# Tutorial: my_lm
+## Tutorial: my_lm
 
-The regression model below will be using `lifeExp` as the response variable and
-`gdpPercap` and `continent` as the explanatory variables. The hypothesis test 
-associated with the coefficient `gdpPercap`, which is the GDP per capita in USD,
-is:
+The linear regression model below will be using `lifeExp` as the response 
+variable and `gdpPercap` and `continent` as the explanatory variables. The
+hypothesis test associated with the coefficient `gdpPercap`, which is the GDP 
+per capita in USD, is:
 
 $H_0: \beta = 0$
 
@@ -98,7 +100,7 @@ test <- my_lm(lifeExp ~ gdpPercap + continent, my_gapminder)
 ```
 
 From the results, the p-value for `gdpPercap` coefficient is 8.55e-73, which is 
-less than $\alpha = 0.05$, so I reject the null hypothesis. There is strong
+less than $\alpha$ = 0.05, so I reject the null hypothesis. There is strong
 evidence that there is a relationship between `lifeExp` and `gdpPercap`. 
 
 ```{r}
@@ -110,7 +112,7 @@ my_df <- data.frame("Fitted" = y_hat,
                     "Actual" = my_gapminder$lifeExp,
                     "Continent" = my_gapminder$continent)
 
-# load ggplot2 to plot the fitted vs actual values
+# use ggplot2 to plot the fitted vs actual values
 library(ggplot2)
 ggplot(my_df, aes(x = Actual, y = Fitted, color = Continent)) +
   geom_point() +
@@ -122,11 +124,82 @@ From the plot, the line is the model fit and the data points are the actual
 values. The line appears to fit the data points from Europe and Oceania fairly
 well, but doesn't predict as well for the other continents. 
 
-# Tutorial: my_knn_cv
+## Tutorial: my_knn_cv
 
+For the k-nearest neighbor cross-validation tutorial, we will be predicting 
+output class `continent` using covariates `gdpPercap` and `lifeExp` using a 
+5-fold cross-validation (`k_cv` = 5) and 1- to 10-nearest neighbors 
+(`k_nn` = 1,...,10). In the `my_knn_cv` function, the data is split into
+`k_cv` = 5 folds, and all but one fold is used for training data and fitting
+the model and the last foldfor test data and making prediction, repeated `k_cv`
+= 5 times with different folds each time.
 
+```{r}
+knn_1 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 1, 5)
+# predict table
+pred_1 <- table(my_gapminder$continent, knn_1$class)
+# training error
+train_err_1 <- 1 - sum(diag(pred_1) / (sum(rowSums(pred_1))))
 
-# Tutorial: my_rf_cv
+knn_2 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 2, 5)
+pred_2 <- table(my_gapminder$continent, knn_2$class)
+train_err_2 <- 1 - sum(diag(pred_2) / (sum(rowSums(pred_2))))
+
+knn_3 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 3, 5)
+pred_3 <- table(my_gapminder$continent, knn_3$class)
+train_err_3 <- 1 - sum(diag(pred_3) / (sum(rowSums(pred_3))))
+
+knn_4 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 4, 5)
+pred_4 <- table(my_gapminder$continent, knn_4$class)
+train_err_4 <- 1 - sum(diag(pred_4) / (sum(rowSums(pred_4))))
+
+knn_5 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 5, 5)
+pred_5 <- table(my_gapminder$continent, knn_5$class)
+train_err_5 <- 1 - sum(diag(pred_5) / (sum(rowSums(pred_5))))
+
+knn_6 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 6, 5)
+pred_6 <- table(my_gapminder$continent, knn_6$class)
+train_err_6 <- 1 - sum(diag(pred_6) / (sum(rowSums(pred_6))))
+
+knn_7 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 7, 5)
+pred_7 <- table(my_gapminder$continent, knn_7$class)
+train_err_7 <- 1 - sum(diag(pred_7) / (sum(rowSums(pred_7))))
+
+knn_8 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 8, 5)
+pred_8 <- table(my_gapminder$continent, knn_8$class)
+train_err_8 <- 1 - sum(diag(pred_8) / (sum(rowSums(pred_8))))
+
+knn_9 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 9, 5)
+pred_9 <- table(my_gapminder$continent, knn_9$class)
+train_err_9 <- 1 - sum(diag(pred_9) / (sum(rowSums(pred_9))))
+
+knn_10 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 10, 5)
+pred_10 <- table(my_gapminder$continent, knn_10$class)
+train_err_10 <- 1 - sum(diag(pred_10) / (sum(rowSums(pred_10))))
+
+# table of error values
+err_table <- data.frame("CV_error" = rbind(knn_1$CV_error, knn_2$CV_error,
+                                           knn_3$CV_error, knn_4$CV_error, 
+                                           knn_5$CV_error, knn_6$CV_error, 
+                                           knn_7$CV_error, knn_8$CV_error, 
+                                           knn_9$CV_error, knn_10$CV_error),
+                        "Training_error" = rbind(train_err_1, train_err_2, 
+                                                 train_err_3, train_err_4,
+                                                 train_err_5, train_err_6,
+                                                 train_err_7, train_err_8,
+                                                 train_err_9, train_err_10))
+rownames(err_table) <- NULL
+err_table
+```
+
+Looking at just the `CV_error`, which is the average cross-validation
+misclassification error rate, I would choose to use the model with 10-nearest
+neighbors since it has the lowest CV error. Looking at just the training error,
+I would choose to use the model with 1-nearest neighbor because there is no
+training error. In practice, I would choose the model with 5-nearest neighbor to
+balance between the CV and training errors.
+
+## Tutorial: my_rf_cv
 
 
 
