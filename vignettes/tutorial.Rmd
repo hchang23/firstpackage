@@ -135,71 +135,41 @@ the model and the last foldfor test data and making prediction, repeated `k_cv`
 = 5 times with different folds each time.
 
 ```{r}
-knn_1 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 1, 5)
-# predict table
-pred_1 <- table(my_gapminder$continent, knn_1$class)
-# training error
-train_err_1 <- 1 - sum(diag(pred_1) / (sum(rowSums(pred_1))))
+# empty vectors
+cv_error <- vector()
+train_err <- vector()
 
-knn_2 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 2, 5)
-pred_2 <- table(my_gapminder$continent, knn_2$class)
-train_err_2 <- 1 - sum(diag(pred_2) / (sum(rowSums(pred_2))))
-
-knn_3 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 3, 5)
-pred_3 <- table(my_gapminder$continent, knn_3$class)
-train_err_3 <- 1 - sum(diag(pred_3) / (sum(rowSums(pred_3))))
-
-knn_4 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 4, 5)
-pred_4 <- table(my_gapminder$continent, knn_4$class)
-train_err_4 <- 1 - sum(diag(pred_4) / (sum(rowSums(pred_4))))
-
-knn_5 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 5, 5)
-pred_5 <- table(my_gapminder$continent, knn_5$class)
-train_err_5 <- 1 - sum(diag(pred_5) / (sum(rowSums(pred_5))))
-
-knn_6 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 6, 5)
-pred_6 <- table(my_gapminder$continent, knn_6$class)
-train_err_6 <- 1 - sum(diag(pred_6) / (sum(rowSums(pred_6))))
-
-knn_7 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 7, 5)
-pred_7 <- table(my_gapminder$continent, knn_7$class)
-train_err_7 <- 1 - sum(diag(pred_7) / (sum(rowSums(pred_7))))
-
-knn_8 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 8, 5)
-pred_8 <- table(my_gapminder$continent, knn_8$class)
-train_err_8 <- 1 - sum(diag(pred_8) / (sum(rowSums(pred_8))))
-
-knn_9 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 9, 5)
-pred_9 <- table(my_gapminder$continent, knn_9$class)
-train_err_9 <- 1 - sum(diag(pred_9) / (sum(rowSums(pred_9))))
-
-knn_10 <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, 10, 5)
-pred_10 <- table(my_gapminder$continent, knn_10$class)
-train_err_10 <- 1 - sum(diag(pred_10) / (sum(rowSums(pred_10))))
+# run function 10 times with k_nn = 1:10
+for (i in 1:10) {
+  knn <- my_knn_cv(my_gapminder[, c(4, 6)], my_gapminder$continent, i, 5)
+  # predict table
+  pred <- table(my_gapminder$continent, knn$class)
+  # CV error
+  cv_error[i] <- knn$CV_error
+  # training error
+  train_err[i] <- 1 - sum(diag(pred) / (sum(rowSums(pred))))
+}
 
 # table of error values
-err_table <- data.frame("CV_error" = rbind(knn_1$CV_error, knn_2$CV_error,
-                                           knn_3$CV_error, knn_4$CV_error, 
-                                           knn_5$CV_error, knn_6$CV_error, 
-                                           knn_7$CV_error, knn_8$CV_error, 
-                                           knn_9$CV_error, knn_10$CV_error),
-                        "Training_error" = rbind(train_err_1, train_err_2, 
-                                                 train_err_3, train_err_4,
-                                                 train_err_5, train_err_6,
-                                                 train_err_7, train_err_8,
-                                                 train_err_9, train_err_10))
-rownames(err_table) <- NULL
+err_table <- cbind(cv_error, train_err)
 err_table
 ```
 
-Looking at just the `CV_error`, which is the average cross-validation
+Looking at just the `cv_error`, which is the average cross-validation
 misclassification error rate, I would choose to use the model with 10-nearest
-neighbors since it has the lowest CV error. Looking at just the training error,
+neighbors since it has the lowest CV error. Looking at just the `train_err`,
 I would choose to use the model with 1-nearest neighbor because there is no
 training error. In practice, I would choose the model with 5-nearest neighbor to
 balance between the CV and training errors.
 
 ## Tutorial: my_rf_cv
 
+The `my_rf_cv` function predicts `lifeExp` using covariate `gdpPercap` from the
+`my_gapminder` data. We will use `k` = 2, 5, 10, ran 30 times for each `k`, for
+this tutorial.
+
+```{r}
+
+```
 
 
