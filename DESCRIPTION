@@ -13,7 +13,8 @@ Imports:
     magrittr,
     class, 
     randomForest,
-    stats
+    stats,
+    ggplot2
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
