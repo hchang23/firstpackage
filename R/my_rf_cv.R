@@ -1,7 +1,8 @@
 #' Random Forest Cross-Validation
 #'
-#' This function uses the \code{my_gapminder} data to predict \code{lifeExp}
-#' using covariate \code{gdpPercap} using folds.
+#' This function performs a random forest cross validation, using the
+#' \code{my_gapminder} data to predict \code{lifeExp} using covariate
+#' \code{gdpPercap} using folds.
 #'
 #' @import randomForest magrittr stats
 #'

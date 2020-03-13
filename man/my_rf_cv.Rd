@@ -13,8 +13,9 @@ my_rf_cv(k)
 A numeric for the cross-validation error.
 }
 \description{
-This function uses the \code{my_gapminder} data to predict \code{lifeExp}
-using covariate \code{gdpPercap} using folds.
+This function performs a random forest cross validation, using the
+\code{my_gapminder} data to predict \code{lifeExp} using covariate
+\code{gdpPercap} using folds.
 }
 \examples{
 my_rf_cv(5)
