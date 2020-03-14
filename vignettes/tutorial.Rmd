@@ -97,11 +97,12 @@ $H_A: \beta \neq 0$
 
 ```{r}
 test <- my_lm(lifeExp ~ gdpPercap + continent, my_gapminder)
+test
 ```
 
-From the results, the p-value for `gdpPercap` coefficient is 8.55e-73, which is 
-less than $\alpha$ = 0.05, so I reject the null hypothesis. There is strong
-evidence that there is a relationship between `lifeExp` and `gdpPercap`. 
+From the results, the p-value for `gdpPercap` coefficient is `r test[2, 4]`, 
+which is less than $\alpha$ = 0.05, so I reject the null hypothesis. There is 
+strong evidence that there is a relationship between `lifeExp` and `gdpPercap`. 
 
 ```{r}
 # make data frame of fitted and actual values
@@ -186,7 +187,6 @@ colnames(cv_mse) <- c("k", "MSE")
 cv_mse$k <- factor(cv_mse$k, levels = c("2", "5", "10"))
 ```
 
-
 ```{r}
 # create side-by-side boxplot of the cross-validation MSE for each k
 ggplot(cv_mse, aes(k, MSE, fill = k)) +
@@ -194,7 +194,7 @@ ggplot(cv_mse, aes(k, MSE, fill = k)) +
   labs(title = "CV Estimated MSE for Each k-Fold",
        x = "\nk-Folds", y = "Estimated MSE\n") +
   theme_light() +
-  theme(plot.title = element_text(hjust = 0.5, size = 15),
+  theme(plot.title = element_text(hjust = 0.5, size = 12),
         legend.position = "none")
 ```
 
