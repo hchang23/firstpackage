@@ -218,7 +218,7 @@ Looking at both the boxplot and the table, the median CV estimates are not too
 different, but the variance increases as the number of folds increases. For 
 `k` = 2, the standard deviation is `r cv_table[1, 3]` while for `k` = 10, the 
 standard deviation is `r cv_table[3, 3]`. This happens because there is a
-bias-variance tradeoff when doing k-fold cross validation. Lower values of k has
+bias-variance tradeoff when doing k-fold cross validation. Lower values of k have
 higher bias but lower variance, and as k approaches n, the number of training 
 data, the estimates have lower bias but variance increases.
 
