@@ -164,12 +164,62 @@ balance between the CV and training errors.
 
 ## Tutorial: my_rf_cv
 
-The `my_rf_cv` function predicts `lifeExp` using covariate `gdpPercap` from the
-`my_gapminder` data. We will use `k` = 2, 5, 10, ran 30 times for each `k`, for
-this tutorial.
+The `my_rf_cv` function uses the random forest algorithm to predict `lifeExp` 
+using covariate `gdpPercap` from the `my_gapminder` data. We will use `k` = 2,
+5, 10, ran 30 times for each `k`, for this tutorial.
 
 ```{r}
+# empty data frame and vector
+cv_mse <- data.frame()
+k_val <- c(2, 5, 10)
 
+# 3 k values
+for (i in 1:3) {
+  # 30 iterations of function
+  for (j in 1:30) {
+    cv_mse[30 * (i - 1) + j, 1] <- k_val[i] # column for ith k 
+    cv_mse[30 * (i - 1) + j, 2] <- my_rf_cv(k_val[i]) # function for ith k
+  }
+}
+
+colnames(cv_mse) <- c("k", "MSE")
+cv_mse$k <- factor(cv_mse$k, levels = c("2", "5", "10"))
 ```
+
+
+```{r}
+# create side-by-side boxplot of the cross-validation MSE for each k
+ggplot(cv_mse, aes(k, MSE, fill = k)) +
+  geom_boxplot() +
+  labs(title = "CV Estimated MSE for Each k-Fold",
+       x = "\nk-Folds", y = "Estimated MSE\n") +
+  theme_light() +
+  theme(plot.title = element_text(hjust = 0.5, size = 15),
+        legend.position = "none")
+```
+
+```{r}
+# empty vectors
+avg_cv <- vector()
+sd_cv <- vector()
+
+# calculate mean and standard deviation of CV estimates for each k
+for (i in 1:3) {
+  avg_cv[i] <- mean(cv_mse[cv_mse$k == k_val[i], 2])
+  sd_cv[i] <- sd(cv_mse[cv_mse$k == k_val[i], 2])
+}
+# create table of means and sds
+cv_table <- cbind("k-Fold" = c(2, 5, 10), "Avg_CV" = avg_cv, 
+                  "CV_SD" = sd_cv)
+cv_table
+```
+
+Looking at both the boxplot and the table, the median CV estimates are not too 
+different, but the variance increases as the number of folds increases. For 
+`k` = 2, the standard deviation is `r cv_table[1, 3]` while for `k` = 10, the 
+standard deviation is `r cv_table[3, 3]`. This happens because there is a
+bias-variance tradeoff when doing k-fold cross validation. Lower values of k has
+higher bias but lower variance, and as k approaches n, the number of training 
+data, the estimates have lower bias but variance increases.
 
 
